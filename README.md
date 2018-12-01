@@ -9,7 +9,8 @@ mini library which have make to possible transmission of variables in different 
 ### Using
 - Install project
 - Plug in abstract or object class indepennt at yor abilities
-- Use by function `run([],[])`
+- Use without object creation by `UtovA::run([],[])`
+- Use with object creation by `$object = new UtovB; $object->run([],[])`
 
 ### Try this in your project
 
