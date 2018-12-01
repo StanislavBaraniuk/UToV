@@ -17,6 +17,7 @@ abstract class UtovA
         switch ($logger) {
             case 0;
                 // Off log
+                self::clearElse($default,$input);
                 break;
             case 1:
                 self::set_logging(['error' => false, 'warning' => true],$default,$input);
@@ -46,10 +47,19 @@ abstract class UtovA
         foreach ($input as $key => $item)  {
             if (!isset($default[$key])) {
                 $report .= ' "'.$key.'" with value = "'.$item.'" undefined;';
+                unset($item);
             }
         }
 
         self::$log->createWarning($report);
         self::$log->createError($report);
+    }
+
+    private  static function clearElse ($default, &$input) {
+        foreach ($input as $key => &$item)  {
+            if (!isset($default[$key])) {
+                unset($item);
+            }
+        }
     }
 }

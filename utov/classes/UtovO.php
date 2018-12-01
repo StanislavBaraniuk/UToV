@@ -17,6 +17,7 @@ class UtovO
         switch ($logger) {
             case 0;
                 // Off log
+                $this->clearElse($default, $input);
                 break;
             case 1:
                 $this->set_logging(['error' => false, 'warning' => true],$default,$input);
@@ -46,10 +47,19 @@ class UtovO
         foreach ($input as $key => $item)  {
             if (!isset($default[$key])) {
                 $report .= ' "'.$key.'" with value = "'.$item.'" undefined;';
+                unset($item);
             }
         }
 
         $this->log->createWarning($report);
         $this->log->createError($report);
+    }
+
+    private function clearElse ($default, &$input) {
+        foreach ($input as $key => &$item)  {
+            if (!isset($default[$key])) {
+                unset($item);
+            }
+        }
     }
 }
