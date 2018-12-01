@@ -5,7 +5,7 @@
     - Add Logger module 
 
 **Universal Transmission of Variables** - 
-mini library which have make to possible transmission of variables in different order to function.
+mini library which have make to possible transmission of variables in different order to function with saving of the default values of variables.
 
 ### Instalation
  `$ git clone https://github.com/StanislavBaranuk/UToV.git`
