@@ -1,5 +1,9 @@
 ![](https://img.shields.io/badge/version-developer%200.0.2-green.svg)
 
+    In this version
+    - Fixed bugs
+    - Add Logger module 
+
 **Universal Transmission of Variables** - 
 mini library which have make to possible transmission of variables in different order to function.
 
@@ -27,7 +31,7 @@ mini library which have make to possible transmission of variables in different 
     - `2` logger will show error when will getting non existent variables
 
 ### Try this `object` example in your project
-
+```php
     <?php
         function utov_example ($properties = []) {
             /** default values will :
@@ -43,9 +47,9 @@ mini library which have make to possible transmission of variables in different 
         utov_example(["a" => 2]); // a : 2 + b : 1 = 3
         utov_example(["a" => 5, "b" => 2]); // a : 5 + b : 2 = 7
     ?>
-    
+```    
 ### Try this `abstract` example in your project
-
+```php
     <?php
         function utovo_example ($properties = []) {
             /** default values will :
@@ -62,9 +66,9 @@ mini library which have make to possible transmission of variables in different 
         utovo_example(["a" => 2]); // a : 2 + b : 1 = 3
         utovo_example(["a" => 5, "b" => 2]); // a : 5 + b : 2 = 7
     ?>
-    
+```   
 ### Try this for `Logger` test
-    
+```php
     <?php
         function utov_logger_example_warning ($properties = []) {
             $properties = UtovA::run(["a" => 1, "b" => 1], $properties, 1);
@@ -78,3 +82,4 @@ mini library which have make to possible transmission of variables in different 
             
         utov_logger_example_error(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); //Fatal error:  "ERROR" with value = "1" undefined; in <link in your project> on line <number of line>
     ?>
+```
