@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/version-developer%200.0.2-green.svg)
+![](https://img.shields.io/badge/version-develop%200.0.2-green.svg)
 
     In this version
     - Fixed bugs
