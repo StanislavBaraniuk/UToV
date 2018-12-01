@@ -6,28 +6,50 @@
  * Time: 18:10
  */
 
+require_once 'Logger.php';
+
 abstract class UtovA
 {
-    public static function run ($default = [], $input = [], $registry_independence = true) {
-        if (!$registry_independence) {
-            foreach ($default as $key => $item) {
-                $default[strtoupper($key)] = $item;
-                array_splice($default, $key, 1);
-            }
+    private static $log = null;
+
+    public static function run ($default = [], $input = [], $logger = 0) {
+
+        switch ($logger) {
+            case 0;
+                // Off log
+                break;
+            case 1:
+                self::set_logging(['error' => false, 'warning' => true],$default,$input);
+                break;
+            case 2:
+                self::set_logging(['error' => true, 'warning' => false],$default,$input);
+                break;
+            default:
+                trigger_error("Logger type '".$logger."' is undefined", E_USER_ERROR);
         }
 
         foreach ($default as $key => $item)  {
-            if (!isset($input[$registry_independence ? $key : strtoupper($key)])) {
-                $input[$registry_independence ? $key : strtoupper($key)] =  $item;
-            }
-        }
-
-        if (!$registry_independence) {
-            foreach ($input as $key => $item) {
-                array_splice($input, $key, 1, strtolower($key));
+            if (!isset($input[$key])) {
+                $input[$key] =  $item;
             }
         }
 
         return $input;
+    }
+
+    private static function set_logging ($log_typing, $default, $input) {
+        $report = '';
+
+        self::$log = new Logger();
+        self::$log->track($log_typing);
+
+        foreach ($input as $key => $item)  {
+            if (!isset($default[$key])) {
+                $report .= ' "'.$key.'" with value = "'.$item.'" undefined;';
+            }
+        }
+
+        self::$log->createWarning($report);
+        self::$log->createError($report);
     }
 }
