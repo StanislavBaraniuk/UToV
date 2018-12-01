@@ -70,11 +70,11 @@ mini library which have make to possible transmission of variables in different 
             $properties = UtovA::run(["a" => 1, "b" => 1], $properties, 1);
         }
     
-        utov_example(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); // Warning: "ERROR" with value = "1" undefined; "ERROR2" with value = "5" undefined;
+        utov_logger_example_warning(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); // Warning: "ERROR" with value = "1" undefined; "ERROR2" with value = "5" undefined;
     
         function utov_logger_example_error ($properties = []) {
                     $properties = UtovA::run(["a" => 1, "b" => 1], $properties, 2);
                 }
             
-        utov_example(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); //Fatal error:  "ERROR" with value = "1" undefined; in <link in your project> on line <number of line>
+        utov_logger_example_error(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); //Fatal error:  "ERROR" with value = "1" undefined; in <link in your project> on line <number of line>
     ?>
