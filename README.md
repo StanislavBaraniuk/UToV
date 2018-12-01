@@ -1,22 +1,34 @@
-![](https://img.shields.io/badge/version-0.0.1-green.svg)
+![](https://img.shields.io/badge/version-developer%200.0.2-green.svg)
 
 **Universal Transmission of Variables** - 
 mini library which have make to possible transmission of variables in different order to function.
 
 ### Instalation
-`$ git clone https://github.com/StanislavBaranuk/UToV.git`
+ `$ git clone https://github.com/StanislavBaranuk/UToV.git`
 
 ### Using
 - Install project
-- Plug in abstract or object class indepennt at yor abilities
+- Plug in abstract or object class dependent at yor abilities
+    - `require_once "UToV/utov/index.php";` connect "UToV" default version
+    - `require_once "UToV/utov.min/index.php";` connect "UToV" minimized version
 - Use without object creation by `UtovA::run([],[])`
 - Use with object creation by `$object = new UtovB(); $object->run([],[])`
 
-### Try this in your project
+
+### Configuration
+
+> `run([default],[input],logger)`
+
+- `default` : [ASSOCIATIVE ARRAY]() : set default values here
+- `input` : [ASSOCIATIVE ARRAY]() : set input values here
+- `logger` : [INTEGER]() : set logging type 
+    - `0` logger off
+    - `1` logger will show warnings when will getting non existent variables
+    - `2` logger will show error when will getting non existent variables
+
+### Try this `object` example in your project
 
     <?php
-        include "./utov.min/index.php";
-        
         function utov_example ($properties = []) {
             /** default values will :
              * a = 1
@@ -32,3 +44,37 @@ mini library which have make to possible transmission of variables in different 
         utov_example(["a" => 5, "b" => 2]); // a : 5 + b : 2 = 7
     ?>
     
+### Try this `abstract` example in your project
+
+    <?php
+        function utovo_example ($properties = []) {
+            /** default values will :
+            * a = 1
+            * b = 1
+            */
+            $ob = new UtovO();
+            $properties = $ob->run(["a" => 1, "b" => 1], $properties, 0);
+        
+            echo "a : ".$properties["a"]." + b : ".$properties["b"]." = ".($properties["a"] + $properties["b"])."\n";
+        }
+        
+        utovo_example(); // a : 1 + b : 1 = 2
+        utovo_example(["a" => 2]); // a : 2 + b : 1 = 3
+        utovo_example(["a" => 5, "b" => 2]); // a : 5 + b : 2 = 7
+    ?>
+    
+### Try this for `Logger` test
+    
+    <?php
+        function utov_logger_example_warning ($properties = []) {
+            $properties = UtovA::run(["a" => 1, "b" => 1], $properties, 1);
+        }
+    
+        utov_example(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); // Warning: "ERROR" with value = "1" undefined; "ERROR2" with value = "5" undefined;
+    
+        function utov_logger_example_error ($properties = []) {
+                    $properties = UtovA::run(["a" => 1, "b" => 1], $properties, 2);
+                }
+            
+        utov_example(["a" => 2, "ERROR" => 1, "ERROR2" => 5]); //Fatal error:  "ERROR" with value = "1" undefined; in <link in your project> on line <number of line>
+    ?>
