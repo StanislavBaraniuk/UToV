@@ -3,10 +3,10 @@
 **Universal Transmission of Variables** - 
 mini library which have make to possible transmission of variables in different order to function.
 
-###Instalation
+#Instalation
 `$ git clone https://github.com/StanislavBaranuk/UToV.git`
 
-###Using
+#sing
 - Install project
 - Plug in abstract or object class indepennt at yor abilities
 - Use by function `run([],[])`
