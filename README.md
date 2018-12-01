@@ -30,7 +30,7 @@ mini library which have make to possible transmission of variables in different 
     - `1` logger will show warnings when will getting non existent variables
     - `2` logger will show error when will getting non existent variables
 
-### Try this `object` example in your project
+### Try this `abstract` example in your project
 ```php
     <?php
         function utov_example ($properties = []) {
@@ -48,7 +48,7 @@ mini library which have make to possible transmission of variables in different 
         utov_example(["a" => 5, "b" => 2]); // a : 5 + b : 2 = 7
     ?>
 ```    
-### Try this `abstract` example in your project
+### Try this `object` example in your project
 ```php
     <?php
         function utovo_example ($properties = []) {
