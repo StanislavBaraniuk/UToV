@@ -12,7 +12,7 @@ class UtovO
 {
     private $log = null;
 
-    public function run ($default = [], $input = [], $logger = 0) {
+    public function run ($default = [], $input = [], $logger = 0, $reg = true) {
 
         switch ($logger) {
             case 0;
@@ -29,11 +29,21 @@ class UtovO
                 trigger_error("Logger type '".$logger."' is undefined", E_USER_ERROR);
         }
 
+        if (!$reg) {
+            $this->keyToReg($default, $input, 1);
+        }
+
+
         foreach ($default as $key => $item)  {
             if (!isset($input[$key])) {
                 $input[$key] =  $item;
             }
         }
+
+        if (!$reg) {
+            $this->keyToReg($default, $input, 1);
+        }
+
 
         return $input;
     }
@@ -61,5 +71,23 @@ class UtovO
                 unset($item);
             }
         }
+    }
+
+    private function keyToReg(&$default,&$input, $reg) {
+        $time_d = [];
+        $time_i = [];
+
+        foreach ($default as $key => $item) {
+            $time_d[$reg == 1 ? strtoupper($key) : strtolower($key)] = $item;
+        }
+        foreach ($input as $key => $item) {
+            $time_i[$reg == 1 ? strtoupper($key) : strtolower($key)] = $item;
+        }
+
+        $default = $time_d;
+        $input = $time_i;
+
+        unset($time_d);
+        unset($time_i);
     }
 }

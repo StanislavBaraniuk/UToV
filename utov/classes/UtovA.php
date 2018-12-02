@@ -12,7 +12,7 @@ abstract class UtovA
 {
     private static $log = null;
 
-    public static function run ($default = [], $input = [], $logger = 0) {
+    public static function run ($default = [], $input = [], $logger = 0, $reg = true) {
 
         switch ($logger) {
             case 0;
@@ -29,10 +29,18 @@ abstract class UtovA
                 trigger_error("Logger type '".$logger."' is undefined", E_USER_ERROR);
         }
 
-        foreach ($default as $key => $item)  {
+        if (!$reg) {
+            self::keyToReg($default, $input, 1);
+        }
+
+        foreach ($default as $key => $item) {
             if (!isset($input[$key])) {
-                $input[$key] =  $item;
+                $input[$key] = $item;
             }
+        }
+
+        if (!$reg) {
+            self::keyToReg($default, $input, 0);
         }
 
         return $input;
@@ -62,4 +70,24 @@ abstract class UtovA
             }
         }
     }
+
+    private static function keyToReg(&$default,&$input, $reg) {
+        $time_d = [];
+        $time_i = [];
+
+        foreach ($default as $key => $item) {
+            $time_d[$reg == 1 ? strtoupper($key) : strtolower($key)] = $item;
+        }
+        foreach ($input as $key => $item) {
+            $time_i[$reg == 1 ? strtoupper($key) : strtolower($key)] = $item;
+        }
+
+        $default = $time_d;
+        $input = $time_i;
+
+        unset($time_d);
+        unset($time_i);
+    }
+
 }
+
