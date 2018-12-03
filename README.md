@@ -14,13 +14,13 @@ mini library which have make to possible transmission of variables in different 
 - Plug in abstract or object class dependent at yor abilities
     - `require_once "UToV/utov/index.php";` connect "UToV" default version
     - `require_once "UToV/utov.min/index.php";` connect "UToV" minimized version
-- Use without object creation by `UtovA::run([],[])`
-- Use with object creation by `$object = new UtovB(); $object->run([],[])`
+- Use without object creation by `UtovA::run([],[],int,boolean)`
+- Use with object creation by `$object = new UtovB(); $object->run([],[]int,boolean)`
 
 
 ### Configuration
 
-> `run([default],[input],logger)`
+> `run([default],[input],logger, reg)`
 
 - `default` : [ASSOCIATIVE ARRAY]() : set default values here
 - `input` : [ASSOCIATIVE ARRAY]() : set input values here
